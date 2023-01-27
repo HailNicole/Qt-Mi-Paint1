@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>recursos/abrir-documento.png</file>
+        <file>recursos/ancho-del-texto.png</file>
+        <file>recursos/circulo.png</file>
+        <file>recursos/libro-de-arte.png</file>
+        <file>recursos/menu.png</file>
+        <file>recursos/puerta-de-salida.png</file>
+        <file>recursos/rectangulo.png</file>
+        <file>recursos/registro.png</file>
+        <file>recursos/rueda-de-color.png</file>
+        <file>recursos/salvar.png</file>
+        <file>recursos/paleta.png</file>
+    </qresource>
+</RCC>

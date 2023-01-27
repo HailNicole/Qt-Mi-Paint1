@@ -35,7 +35,7 @@ void Principal::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     // Dibujar la imagen
     painter.drawImage(0, 0, *mImagen);
-    // Acepatr el evento
+    // Aceptar el evento
     event->accept();
 }
 
@@ -62,17 +62,17 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
     mFinal = event->pos();
     // Crear un pincel y establecer atributos
     QPen pincel;
-    pincel.setColor(mColor);
-    pincel.setWidth(mAncho);
-    // Dibujar una linea
-    mPainter->setPen(pincel);
-    mPainter->drawLine(mInicial, mFinal);
-    // Mostrar el número de líneas en la barra de estado
-    ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
-    // Actualizar la interfaz (repinta con paintEvent)
-    update();
-    // actualizar el punto inicial
-    mInicial = mFinal;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+        // Dibujar una linea
+        mPainter->setPen(pincel);
+        mPainter->drawLine(mInicial, mFinal);
+        // Mostrar el número de líneas en la barra de estado
+        ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
+        // Actualizar la interfaz (repinta con paintEvent)
+        update();
+        // actualizar el punto inicial
+        mInicial = mFinal;
 }
 
 void Principal::mouseReleaseEvent(QMouseEvent *event)
@@ -81,7 +81,6 @@ void Principal::mouseReleaseEvent(QMouseEvent *event)
     mPuedeDibujar = false;
     // Aceptar el vento
     event->accept();
-
 }
 
 
@@ -118,7 +117,7 @@ void Principal::on_actionGuardar_triggered()
     // Abrir cuadro de diálogo para obtener el nombre del archivo
     QString nombreArchivo = QFileDialog::getSaveFileName(this,
                                                          "Guardar imagen",
-                                                         QString(),
+                                                         QDir::home().absolutePath(),
                                                          "Imágenes .png (*.png)");
     // Validar que el nombre del archivo no sea vacío
     if ( !nombreArchivo.isEmpty() ){
@@ -135,4 +134,59 @@ void Principal::on_actionGuardar_triggered()
                                  "No se pudo almacenar la imagen.");
         }
     }
+}
+
+void Principal::on_actionLibre_triggered()
+{
+    m_ops = 1;
+    ui->actionLineas->setChecked(false);
+    ui->actionLibre->setChecked(true);
+    ui->actionRect_nculos->setChecked(false);
+    ui->actionCircunferencias->setChecked(false);
+}
+
+void Principal::on_actionLineas_triggered()
+{
+    m_ops = 2;
+    ui->actionLineas->setChecked(true);
+    ui->actionLibre->setChecked(false);
+    ui->actionRect_nculos->setChecked(false);
+    ui->actionCircunferencias->setChecked(false);
+}
+
+
+void Principal::on_actionRect_nculos_triggered()
+{
+    m_ops = 3;
+    ui->actionLineas->setChecked(false);
+    ui->actionLibre->setChecked(false);
+    ui->actionRect_nculos->setChecked(true);
+    ui->actionCircunferencias->setChecked(false);
+}
+
+
+void Principal::on_actionCircunferencias_triggered()
+{
+    m_ops = 4;
+    ui->actionLineas->setChecked(false);
+    ui->actionLibre->setChecked(false);
+    ui->actionRect_nculos->setChecked(false);
+    ui->actionCircunferencias->setChecked(true);
+}
+
+
+void Principal::on_actionAbrir_triggered()
+{
+    QString nombreArchivo = QFileDialog::getOpenFileName(this,"Imagen",QDir::home().absoluteFilePath("/home/nicol/Imágenes"),"Imagenes(*.jpg *.jpeg *.png);;Todos los ficheros(*)");
+
+           if (nombreArchivo.isNull()){
+              QMessageBox::warning(this, "Salarios", "No se puede abrir el archivo");
+           }else{
+               mImagen->load(nombreArchivo);
+
+               /*m_picture = m_picture.scaled(ui->label->size(), Qt::KeepAspectRatio);
+               ui->label->setAlignment(Qt::AlignHCenter);
+               ui->label->setPixmap(QPixmap::fromImage(m_picture));*/
+               m_nombre = nombreArchivo;
+           }
 }

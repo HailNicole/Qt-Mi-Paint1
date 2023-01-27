@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Principal</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="recursos.qrc">
+    <normaloff>:/recursos/paleta.png</normaloff>:/recursos/paleta.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -31,6 +35,7 @@
      <string>Archivo</string>
     </property>
     <addaction name="actionNuevo"/>
+    <addaction name="actionAbrir"/>
     <addaction name="actionGuardar"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
@@ -56,7 +61,32 @@
    <addaction name="menuForma"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNuevo"/>
+   <addaction name="actionGuardar"/>
+   <addaction name="actionAbrir"/>
+   <addaction name="actionColor"/>
+   <addaction name="actionAncho"/>
+   <addaction name="actionLibre"/>
+   <addaction name="actionLineas"/>
+   <addaction name="actionRect_nculos"/>
+   <addaction name="actionCircunferencias"/>
+   <addaction name="actionSalir"/>
+  </widget>
   <action name="actionNuevo">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/registro.png</normaloff>:/recursos/registro.png</iconset>
+   </property>
    <property name="text">
     <string>Nuevo</string>
    </property>
@@ -65,6 +95,10 @@
    </property>
   </action>
   <action name="actionGuardar">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/salvar.png</normaloff>:/recursos/salvar.png</iconset>
+   </property>
    <property name="text">
     <string>Guardar</string>
    </property>
@@ -73,6 +107,10 @@
    </property>
   </action>
   <action name="actionSalir">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/puerta-de-salida.png</normaloff>:/recursos/puerta-de-salida.png</iconset>
+   </property>
    <property name="text">
     <string>Salir</string>
    </property>
@@ -81,6 +119,10 @@
    </property>
   </action>
   <action name="actionColor">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/rueda-de-color.png</normaloff>:/recursos/rueda-de-color.png</iconset>
+   </property>
    <property name="text">
     <string>Color</string>
    </property>
@@ -89,6 +131,10 @@
    </property>
   </action>
   <action name="actionAncho">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/ancho-del-texto.png</normaloff>:/recursos/ancho-del-texto.png</iconset>
+   </property>
    <property name="text">
     <string>Ancho</string>
    </property>
@@ -97,29 +143,83 @@
    </property>
   </action>
   <action name="actionLineas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/menu.png</normaloff>:/recursos/menu.png</iconset>
+   </property>
    <property name="text">
     <string>Lineas</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionLibre">
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/libro-de-arte.png</normaloff>:/recursos/libro-de-arte.png</iconset>
+   </property>
    <property name="text">
     <string>Libre</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionRect_nculos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/rectangulo.png</normaloff>:/recursos/rectangulo.png</iconset>
+   </property>
    <property name="text">
     <string>Rectánculos</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionCircunferencias">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/circulo.png</normaloff>:/recursos/circulo.png</iconset>
+   </property>
    <property name="text">
     <string>Circunferencias</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/recursos/abrir-documento.png</normaloff>:/recursos/abrir-documento.png</iconset>
+   </property>
+   <property name="text">
+    <string>Abrir</string>
+   </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>
