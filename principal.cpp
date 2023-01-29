@@ -8,6 +8,7 @@ Principal::Principal(QWidget *parent)
     , ui(new Ui::Principal)
 {
     ui->setupUi(this);
+    setWindowTitle("MI PAINT");
     // Instanciando la imagen (creando)
     mImagen = new QImage(this->size(),QImage::Format_ARGB32_Premultiplied);
     // Rellenar la imagen de color blanco
@@ -117,7 +118,7 @@ void Principal::on_actionGuardar_triggered()
     // Abrir cuadro de diálogo para obtener el nombre del archivo
     QString nombreArchivo = QFileDialog::getSaveFileName(this,
                                                          "Guardar imagen",
-                                                         QDir::home().absolutePath(),
+                                                         QDir::home().absolutePath() + "/img.png",
                                                          "Imágenes .png (*.png)");
     // Validar que el nombre del archivo no sea vacío
     if ( !nombreArchivo.isEmpty() ){
@@ -177,16 +178,16 @@ void Principal::on_actionCircunferencias_triggered()
 
 void Principal::on_actionAbrir_triggered()
 {
-    QString nombreArchivo = QFileDialog::getOpenFileName(this,"Imagen",QDir::home().absoluteFilePath("/home/nicol/Imágenes"),"Imagenes(*.jpg *.jpeg *.png);;Todos los ficheros(*)");
+    QString nombreArchivo = QFileDialog::getOpenFileName(this,"Imagen",QDir::home().absolutePath(),"Imagenes(*.jpg *.jpeg *.png);;Todos los ficheros(*)");
 
            if (nombreArchivo.isNull()){
-              QMessageBox::warning(this, "Salarios", "No se puede abrir el archivo");
-           }else{
-               mImagen->load(nombreArchivo);
+              QMessageBox::warning(this, "Mi Paint", "No se puede abrir el archivo");
+              return;
+        }
+        m_picture.load(nombreArchivo);
+        m_picture = m_picture.scaled(this->size(), Qt::KeepAspectRatio);
+        mImagen = new QImage(m_picture);
 
-               /*m_picture = m_picture.scaled(ui->label->size(), Qt::KeepAspectRatio);
-               ui->label->setAlignment(Qt::AlignHCenter);
-               ui->label->setPixmap(QPixmap::fromImage(m_picture));*/
-               m_nombre = nombreArchivo;
-           }
+        mPainter = new QPainter(mImagen);
+        mPainter->setRenderHint(QPainter::Antialiasing);
 }
