@@ -21,6 +21,8 @@ Principal::Principal(QWidget *parent)
     mColor = Qt::black;
     mAncho = DEFAULT_ANCHO;
     mNumLineas = 0;
+    m_ops = 1;
+    ui->actionLibre->setChecked(true);
 }
 
 Principal::~Principal()
@@ -65,6 +67,7 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
     QPen pincel;
         pincel.setColor(mColor);
         pincel.setWidth(mAncho);
+    if(m_ops==1){
         // Dibujar una linea
         mPainter->setPen(pincel);
         mPainter->drawLine(mInicial, mFinal);
@@ -74,14 +77,38 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
         update();
         // actualizar el punto inicial
         mInicial = mFinal;
+     }
 }
 
 void Principal::mouseReleaseEvent(QMouseEvent *event)
 {
     // Bajar la bandera (no se puede dibujar)
     mPuedeDibujar = false;
-    // Aceptar el vento
-    event->accept();
+    mFinal= event->pos();
+    QPen pincel;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+
+    if(m_ops==2){
+        mPainter->setPen(pincel);
+        mPainter->drawLine(mInicial,mFinal);
+        update();
+        event->accept();
+    }
+    if(m_ops==3){
+        QRect rectangulo (mInicial, mFinal);
+        mPainter->setPen(pincel);
+        mPainter->drawRect(rectangulo);
+        update();
+        event->accept();
+    }
+    if(m_ops==4){
+        QRectF circulos (mInicial, mFinal);
+        mPainter->setPen(pincel);
+        mPainter->drawEllipse(circulos);
+        update();
+        event->accept();
+    }
 }
 
 
@@ -139,7 +166,6 @@ void Principal::on_actionGuardar_triggered()
 
 void Principal::on_actionLibre_triggered()
 {
-    m_ops = 1;
     ui->actionLineas->setChecked(false);
     ui->actionLibre->setChecked(true);
     ui->actionRect_nculos->setChecked(false);
@@ -185,7 +211,7 @@ void Principal::on_actionAbrir_triggered()
               return;
         }
         m_picture.load(nombreArchivo);
-        m_picture = m_picture.scaled(this->size(), Qt::KeepAspectRatio);
+        m_picture = m_picture.scaled(ui->centralwidget->size(), Qt::KeepAspectRatio);
         mImagen = new QImage(m_picture);
 
         mPainter = new QPainter(mImagen);
