@@ -67,6 +67,7 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
     QPen pincel;
         pincel.setColor(mColor);
         pincel.setWidth(mAncho);
+
     if(m_ops==1){
         // Dibujar una linea
         mPainter->setPen(pincel);
@@ -166,6 +167,7 @@ void Principal::on_actionGuardar_triggered()
 
 void Principal::on_actionLibre_triggered()
 {
+    m_ops = 1;
     ui->actionLineas->setChecked(false);
     ui->actionLibre->setChecked(true);
     ui->actionRect_nculos->setChecked(false);
